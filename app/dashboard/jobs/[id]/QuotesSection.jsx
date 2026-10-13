@@ -50,10 +50,10 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
             {/* ── Collapsed row ── */}
             <div
               onClick={() => setExpanded(isExpanded ? null : quote.id)}
-              className="flex items-center justify-between px-4 py-4 cursor-pointer hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between gap-3 px-4 py-4 cursor-pointer hover:bg-gray-50 transition-colors"
             >
-              <div className="flex items-center gap-2.5">
-                <span className="font-medium text-gray-900 text-sm">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 min-w-0">
+                <span className="font-medium text-gray-900 text-sm break-words min-w-0">
                   {carrier.public_name ?? quote.carrier_profiles?.public_name ?? 'Carrier'}
                 </span>
                 {carrier.average_rating > 0 && (
@@ -77,7 +77,7 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 shrink-0">
                 {isCancelled ? (
                   <span className="text-sm text-gray-400">Cancelled</span>
                 ) : isRejected ? (
@@ -103,7 +103,7 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
             {isExpanded && (
               <div className="border-t border-gray-100 bg-white">
                 {/* Hero image */}
-                <div className="relative h-56 w-full overflow-hidden">
+                <div className="relative h-40 sm:h-56 w-full overflow-hidden">
                   <img
                     src={heroImage}
                     alt={carrier.public_name ?? 'Carrier'}
@@ -112,15 +112,15 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
 
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   {/* Carrier header */}
-                  <div className="flex items-start justify-between mb-6 pb-5 border-b border-gray-100">
-                    <div>
+                  <div className="flex items-start justify-between gap-4 mb-6 pb-5 border-b border-gray-100">
+                    <div className="min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">
                           {carrier.public_name?.[0]?.toUpperCase() ?? 'C'}
                         </div>
-                        <span className="font-bold text-gray-900">
+                        <span className="font-bold text-gray-900 break-words min-w-0">
                           {carrier.public_name ?? 'Carrier'}
                         </span>
                         {carrier.application_status === 'active' && (
@@ -140,7 +140,7 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                         View full profile →
                       </Link>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right shrink-0">
                       <p className="text-2xl font-black text-gray-900">
                         ${Number(quote.price).toLocaleString('en-NZ')}
                       </p>
@@ -211,7 +211,7 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                       <p className="font-bold text-sm text-gray-900 mb-1">
                         {carrier.public_name}
                       </p>
-                      <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
+                      <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed break-words">
                         {carrier.profile_description}
                       </p>
                       <Link
@@ -229,7 +229,7 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                     <p className="font-bold text-sm text-gray-900 mb-2">
                       Who you&apos;ll be booking
                     </p>
-                    <p className="text-sm text-gray-500 leading-relaxed">
+                    <p className="text-sm text-gray-500 leading-relaxed break-words">
                       {carrier.profile_description ??
                         `${carrier.public_name ?? 'This carrier'} provides professional moving services across New Zealand with a customer-focused approach and competitive pricing.`}
                     </p>
@@ -237,32 +237,32 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
 
                   {/* Time frame + payment */}
                   <div className="divide-y divide-gray-100 mb-6 pb-5 border-b border-gray-100 text-sm">
-                    <div className="flex items-start justify-between py-3">
-                      <span className="text-gray-400 shrink-0 w-36">Time frame</span>
-                      <span className="text-gray-700 text-right">
+                    <div className="flex items-start justify-between gap-3 py-3">
+                      <span className="text-gray-400 shrink-0 w-28 sm:w-36">Time frame</span>
+                      <span className="text-gray-700 text-right min-w-0 break-words">
                         {formatCollectionWindow(quote)}
                       </span>
                     </div>
                     {terms.timeframes.length > 0 && (
-                      <div className="flex items-start justify-between py-3">
-                        <span className="text-gray-400 shrink-0 w-36">Payment option</span>
-                        <span className="text-gray-700 text-right">
+                      <div className="flex items-start justify-between gap-3 py-3">
+                        <span className="text-gray-400 shrink-0 w-28 sm:w-36">Payment option</span>
+                        <span className="text-gray-700 text-right min-w-0 break-words">
                           {terms.timeframes.join(' · ')}
                         </span>
                       </div>
                     )}
                     {terms.methods.length > 0 && (
-                      <div className="flex items-start justify-between py-3">
-                        <span className="text-gray-400 shrink-0 w-36">Payment method</span>
-                        <span className="text-gray-700 text-right">
+                      <div className="flex items-start justify-between gap-3 py-3">
+                        <span className="text-gray-400 shrink-0 w-28 sm:w-36">Payment method</span>
+                        <span className="text-gray-700 text-right min-w-0 break-words">
                           {terms.methods.join(' · ')}
                         </span>
                       </div>
                     )}
                     {quote.expires_at && (
-                      <div className="flex items-start justify-between py-3">
-                        <span className="text-gray-400 shrink-0 w-36">Offer valid until</span>
-                        <span className={`text-right ${isExpired ? 'text-red-600' : 'text-gray-700'}`}>
+                      <div className="flex items-start justify-between gap-3 py-3">
+                        <span className="text-gray-400 shrink-0 w-28 sm:w-36">Offer valid until</span>
+                        <span className={`text-right min-w-0 break-words ${isExpired ? 'text-red-600' : 'text-gray-700'}`}>
                           {new Date(quote.expires_at).toLocaleString('en-NZ', {
                             day: 'numeric',
                             month: 'short',
@@ -297,8 +297,8 @@ export default function QuotesSection({ quotes, job, userId, conversationsByCarr
                         <span className="text-3xl text-gray-200 font-black leading-none select-none">
                           &ldquo;&ldquo;
                         </span>
-                        <div>
-                          <p className="text-sm text-gray-700 leading-relaxed">
+                        <div className="min-w-0">
+                          <p className="text-sm text-gray-700 leading-relaxed break-words">
                             {recentReview.comment}
                           </p>
                           <p className="text-xs text-gray-400 mt-2">

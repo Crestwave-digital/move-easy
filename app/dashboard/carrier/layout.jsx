@@ -25,8 +25,8 @@ export default function CarrierLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="sticky top-0 z-10 border-b bg-white">
-        <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto px-4">
+      <nav className="sticky top-16 lg:top-20 z-10 border-b bg-white">
+        <div className="mx-auto flex max-w-5xl gap-1 overflow-x-auto scrollbar-hide px-4">
           {NAV.map((item) => {
             const Icon = item.icon
             const isActive =
@@ -39,7 +39,7 @@ export default function CarrierLayout({ children }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-2 whitespace-nowrap border-b-2 px-4 py-4 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 whitespace-nowrap border-b-2 px-3 py-4 text-sm sm:px-4 font-medium transition-colors ${
                   isActive
                     ? 'border-teal-600 text-teal-600'
                     : 'border-transparent text-gray-500 hover:text-gray-800'
@@ -53,7 +53,7 @@ export default function CarrierLayout({ children }) {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+      <main className="mx-auto max-w-5xl px-4 py-6 sm:py-8">{children}</main>
     </div>
   )
 }

@@ -62,7 +62,7 @@ export default function Step3Items({ wizard }) {
     <div>
       <button
         onClick={prevStep}
-        className="mb-6 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
+        className="mb-4 sm:mb-6 -ml-1 sm:ml-0 px-1 sm:px-0 py-2 sm:py-0 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -79,17 +79,17 @@ export default function Step3Items({ wizard }) {
           {state.items.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm"
+              className="flex items-center justify-between gap-3 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm"
             >
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
                   {item.quantity}
                 </span>
-                <span className="font-medium text-gray-800">{item.name}</span>
+                <span className="min-w-0 break-words font-medium text-gray-800">{item.name}</span>
               </div>
               <button
                 onClick={() => removeItem(index)}
-                className="text-xs text-gray-400 hover:text-red-500 transition-colors"
+                className="shrink-0 -my-2 -mr-2 p-2 sm:m-0 sm:p-0 text-xs text-gray-400 hover:text-red-500 transition-colors"
               >
                 Remove
               </button>

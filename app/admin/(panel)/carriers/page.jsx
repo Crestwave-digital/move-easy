@@ -30,12 +30,12 @@ export default async function AdminCarriersPage() {
             <Link
               key={c.id}
               href={`/admin/carriers/${c.id}`}
-              className="block bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-400 hover:shadow-sm transition-all group"
+              className="block bg-white rounded-xl border border-gray-200 p-4 sm:p-5 hover:border-blue-400 hover:shadow-sm transition-all group"
             >
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between gap-2">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-semibold text-gray-800">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <p className="font-semibold text-gray-800 min-w-0 break-words">
                       {c.public_name}
                     </p>
                     <span
@@ -47,17 +47,17 @@ export default async function AdminCarriersPage() {
                       {c.application_status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 break-words">
                     {c.legal_company_name}
                   </p>
-                  <div className="flex gap-4 mt-1.5 text-xs text-gray-400">
-                    {c.email && <span>{c.email}</span>}
+                  <div className="flex flex-wrap gap-x-4 gap-y-0.5 mt-1.5 text-xs text-gray-400">
+                    {c.email && <span className="break-all">{c.email}</span>}
                     {c.phone && <span>{c.phone}</span>}
                   </div>
                 </div>
                 <ChevronRight
                   size={18}
-                  className="text-gray-300 group-hover:text-blue-500 transition-colors"
+                  className="shrink-0 text-gray-300 group-hover:text-blue-500 transition-colors"
                 />
               </div>
             </Link>

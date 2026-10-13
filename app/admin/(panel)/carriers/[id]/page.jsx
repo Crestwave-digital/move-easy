@@ -82,12 +82,12 @@ export default async function CarrierDetailPage({ params }) {
       </Link>
 
       {/* Profile section */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <div className="flex items-start justify-between mb-4">
-          <h1 className="text-xl font-bold text-gray-900">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+          <h1 className="text-xl font-bold text-gray-900 min-w-0 break-words">
             {carrier.public_name}
           </h1>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span
               className={`inline-block text-xs font-semibold px-2.5 py-1.5 rounded-full ${
                 carrier.application_status === 'active'
@@ -109,7 +109,7 @@ export default async function CarrierDetailPage({ params }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
           <div>
             <p className="text-gray-400 mb-0.5">Email</p>
-            <p className="text-gray-800">{email}</p>
+            <p className="text-gray-800 break-all">{email}</p>
           </div>
           <div>
             <p className="text-gray-400 mb-0.5">Phone</p>
@@ -131,7 +131,7 @@ export default async function CarrierDetailPage({ params }) {
           </div>
           <div className="sm:col-span-2">
             <p className="text-gray-400 mb-0.5">Profile Description</p>
-            <p className="text-gray-800">
+            <p className="text-gray-800 break-words">
               {carrier.profile_description || '—'}
             </p>
           </div>
@@ -162,7 +162,7 @@ export default async function CarrierDetailPage({ params }) {
       </div>
 
       {/* Photos section */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">
           Photos {photos.length > 0 && <span className="text-sm font-normal text-gray-400 ml-1">({photos.length})</span>}
         </h2>
@@ -190,7 +190,7 @@ export default async function CarrierDetailPage({ params }) {
       </div>
 
       {/* Documents section */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">Documents</h2>
         {!documents?.length ? (
           <p className="text-sm text-gray-400">No documents uploaded.</p>
@@ -199,13 +199,13 @@ export default async function CarrierDetailPage({ params }) {
             {documents.map((doc) => (
               <div
                 key={doc.id}
-                className="flex items-center justify-between border border-gray-100 rounded-lg p-4"
+                className="flex flex-wrap items-center justify-between gap-3 border border-gray-100 rounded-lg p-4"
               >
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-gray-800 capitalize">
                     {doc.document_type?.replace(/_/g, ' ')}
                   </p>
-                  <div className="flex items-center gap-3 mt-0.5">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-0.5">
                     <a
                       href={privateFileUrl(doc.file_key) ?? doc.file_url}
                       target="_blank"
@@ -247,7 +247,7 @@ export default async function CarrierDetailPage({ params }) {
       </div>
 
       {/* Insurance section */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
         <h2 className="text-lg font-bold text-gray-900 mb-4">Insurance</h2>
         {!insurance?.length ? (
           <p className="text-sm text-gray-400">
@@ -258,13 +258,13 @@ export default async function CarrierDetailPage({ params }) {
             {insurance.map((ins) => (
               <div
                 key={ins.id}
-                className="flex items-center justify-between border border-gray-100 rounded-lg p-4"
+                className="flex flex-wrap items-center justify-between gap-3 border border-gray-100 rounded-lg p-4"
               >
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-medium text-gray-800">
                     {ins.provider_name}
                   </p>
-                  <div className="flex items-center gap-3 mt-0.5">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-0.5">
                     {ins.coverage_amount && (
                       <span className="text-xs text-gray-500">
                         ${Number(ins.coverage_amount).toLocaleString()}

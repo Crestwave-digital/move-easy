@@ -50,9 +50,9 @@ const FEATURES = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-14 sm:py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-black tracking-tight text-gray-900 mb-16 text-center">
+        <h2 className="text-3xl font-black tracking-tight text-gray-900 mb-8 sm:mb-16 text-center">
           Why choose Moving Easy
         </h2>
         <WhyChooseUsAnimated features={FEATURES} />

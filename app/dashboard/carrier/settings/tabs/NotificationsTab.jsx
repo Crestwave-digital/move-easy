@@ -9,7 +9,7 @@ import { JOB_CATEGORY_GROUPS } from '../schemas'
 const ServiceAreaMap = dynamic(() => import('./ServiceAreaMap'), {
   ssr: false,
   loading: () => (
-    <div className="h-64 bg-gray-100 rounded-xl flex items-center justify-center text-sm text-gray-400">
+    <div className="h-64 sm:h-80 bg-gray-100 rounded-xl flex items-center justify-center text-sm text-gray-400">
       Loading map…
     </div>
   ),
@@ -57,7 +57,7 @@ export default function NotificationsTab({ carrierId, notifications }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-8">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 space-y-8 sm:p-6">
       <h2 className="text-lg font-bold text-gray-900">Notifications</h2>
 
       {/* Job categories */}
@@ -134,7 +134,7 @@ export default function NotificationsTab({ carrierId, notifications }) {
         <h3 className="text-sm font-semibold text-gray-800 mb-3">
           Updates from Moving Easy
         </h3>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           {[
             { value: true, label: 'Yes, send me updates' },
             { value: false, label: 'No thanks' },

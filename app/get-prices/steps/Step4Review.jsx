@@ -162,7 +162,7 @@ export default function Step4Review({ wizard }) {
     <div>
       <button
         onClick={prevStep}
-        className="mb-6 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
+        className="mb-4 sm:mb-6 -ml-1 sm:ml-0 px-1 sm:px-0 py-2 sm:py-0 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
       >
         ← Back
       </button>
@@ -176,10 +176,10 @@ export default function Step4Review({ wizard }) {
       </p>
 
       <div className="rounded-xl border border-gray-200 overflow-hidden mb-6">
-        <div className="flex items-start justify-between px-4 py-3.5 border-b border-gray-100">
-          <span className="text-sm text-gray-500">Job type</span>
+        <div className="flex items-start justify-between gap-4 px-4 py-3.5 border-b border-gray-100">
+          <span className="shrink-0 text-sm text-gray-500">Job type</span>
 
-          <span className="text-sm font-semibold text-gray-900">
+          <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
             {JOB_TYPE_LABELS[state.jobType] ?? state.jobType?.replace('_', ' ')}
           </span>
         </div>
@@ -190,7 +190,7 @@ export default function Step4Review({ wizard }) {
               A
             </span>
 
-            <span className="text-sm text-gray-800 font-medium">
+            <span className="min-w-0 break-words text-sm text-gray-800 font-medium">
               {state.pickupAddress}
             </span>
           </div>
@@ -202,41 +202,41 @@ export default function Step4Review({ wizard }) {
               B
             </span>
 
-            <span className="text-sm text-gray-800 font-medium">
+            <span className="min-w-0 break-words text-sm text-gray-800 font-medium">
               {state.deliveryAddress}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100">
-          <span className="text-sm text-gray-500">Move date</span>
+        <div className="flex items-center justify-between gap-4 px-4 py-3.5 border-b border-gray-100">
+          <span className="shrink-0 text-sm text-gray-500">Move date</span>
 
-          <span className="text-sm font-semibold text-gray-900">
+          <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
             {moveDateDisplay()}
           </span>
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100">
-          <span className="text-sm text-gray-500">Pickup details</span>
+        <div className="flex items-center justify-between gap-4 px-4 py-3.5 border-b border-gray-100">
+          <span className="shrink-0 text-sm text-gray-500">Pickup details</span>
 
-          <span className="text-sm font-semibold text-gray-900 text-right">
+          <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
             {state.pickupFloor} · {state.itemLoading}
           </span>
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3.5 border-b border-gray-100">
-          <span className="text-sm text-gray-500">Delivery details</span>
+        <div className="flex items-center justify-between gap-4 px-4 py-3.5 border-b border-gray-100">
+          <span className="shrink-0 text-sm text-gray-500">Delivery details</span>
 
-          <span className="text-sm font-semibold text-gray-900 text-right">
+          <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
             {state.deliveryFloor} · {state.itemUnloading}
           </span>
         </div>
 
         <div className="px-4 py-3.5 border-b border-gray-100">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-500">Items</span>
+            <span className="shrink-0 text-sm text-gray-500">Items</span>
 
-            <span className="text-sm font-semibold text-gray-900">
+            <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
               {state.items.length > 0
                 ? `${state.items.length} item(s)`
                 : 'None added'}
@@ -248,23 +248,23 @@ export default function Step4Review({ wizard }) {
               {state.items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 text-xs text-gray-500"
+                  className="flex items-center gap-2 text-xs text-gray-500 break-words"
                 >
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-gray-100 text-gray-600 font-medium text-[10px]">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 font-medium text-[10px]">
                     {item.quantity}
                   </span>
 
-                  {item.name}
+                  <span className="min-w-0">{item.name}</span>
                 </div>
               ))}
             </div>
           )}
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3.5">
-          <span className="text-sm text-gray-500">Photos</span>
+        <div className="flex items-center justify-between gap-4 px-4 py-3.5">
+          <span className="shrink-0 text-sm text-gray-500">Photos</span>
 
-          <span className="text-sm font-semibold text-gray-900">
+          <span className="min-w-0 text-sm font-semibold text-gray-900 text-right break-words">
             {state.photos.length > 0
               ? `${state.photos.length} photo(s)`
               : 'None'}

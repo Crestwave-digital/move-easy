@@ -114,11 +114,11 @@ export default function PhotosTab({ carrierId, photos: initial }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
       <h2 className="text-lg font-bold text-gray-900 mb-6">Photos</h2>
 
       {/* Upload CTA */}
-      <label className="block w-full border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors mb-6">
+      <label className="block w-full border-2 border-dashed border-gray-300 rounded-xl p-6 text-center cursor-pointer sm:p-8 hover:border-gray-400 hover:bg-gray-50 transition-colors mb-6">
         <Upload size={32} className="mx-auto text-gray-300 mb-2" />
         <p className="text-sm font-medium text-gray-500">
           Click here to upload photos
@@ -159,12 +159,12 @@ export default function PhotosTab({ carrierId, photos: initial }) {
                 />
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100">
+                <div className="absolute inset-x-0 bottom-0 bg-black/40 py-1.5 transition-colors flex items-center justify-center gap-1 sm:inset-0 sm:py-0 sm:bg-black/0 sm:group-hover:bg-black/40 sm:opacity-0 sm:group-hover:opacity-100">
                   {/* Reorder arrows */}
                   <button
                     onClick={() => handleMove(index, -1)}
                     disabled={index === 0}
-                    className="p-1.5 bg-white rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-2 sm:p-1.5 bg-white rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <ChevronLeft size={14} />
                   </button>
@@ -172,7 +172,7 @@ export default function PhotosTab({ carrierId, photos: initial }) {
                   <button
                     onClick={() => handleMove(index, 1)}
                     disabled={index === photos.length - 1}
-                    className="p-1.5 bg-white rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-2 sm:p-1.5 bg-white rounded-full text-gray-700 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <ChevronRight size={14} />
                   </button>
@@ -181,7 +181,7 @@ export default function PhotosTab({ carrierId, photos: initial }) {
                   {!isProfile && (
                     <button
                       onClick={() => handleMakeProfilePhoto(index)}
-                      className="p-1.5 bg-white rounded-full text-amber-500 hover:bg-amber-50"
+                      className="p-2 sm:p-1.5 bg-white rounded-full text-amber-500 hover:bg-amber-50"
                       title="Make profile photo"
                     >
                       <Star size={14} />
@@ -191,7 +191,7 @@ export default function PhotosTab({ carrierId, photos: initial }) {
                   {/* Delete */}
                   <button
                     onClick={() => handleDelete(index)}
-                    className="p-1.5 bg-white rounded-full text-red-500 hover:bg-red-50"
+                    className="p-2 sm:p-1.5 bg-white rounded-full text-red-500 hover:bg-red-50"
                   >
                     <X size={14} />
                   </button>

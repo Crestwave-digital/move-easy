@@ -53,7 +53,7 @@ export default async function AdminOverview() {
         {stats.map((s) => (
           <div
             key={s.label}
-            className={`rounded-xl border p-5 ${
+            className={`rounded-xl border p-4 sm:p-5 ${
               s.green
                 ? 'bg-green-50 border-green-200'
                 : s.highlight && typeof s.value === 'number' && s.value > 0
@@ -62,7 +62,7 @@ export default async function AdminOverview() {
             }`}
           >
             <p
-              className={`text-2xl font-bold ${s.green ? 'text-green-700' : 'text-gray-900'}`}
+              className={`text-xl sm:text-2xl font-bold break-words ${s.green ? 'text-green-700' : 'text-gray-900'}`}
             >
               {s.value}
             </p>

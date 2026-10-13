@@ -134,11 +134,11 @@ export default async function QuoteDetailPage({ params }) {
         ← Back to quotes
       </Link>
 
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">{jobTypeLabel}</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-6 break-words">{jobTypeLabel}</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 items-start">
         {/* ── Left column ── */}
-        <div>
+        <div className="min-w-0">
           {/* Hero image */}
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-6 bg-gray-100">
             {carrierAvatar ? (
@@ -182,8 +182,8 @@ export default async function QuoteDetailPage({ params }) {
           )}
 
           {/* Carrier header row */}
-          <div className="flex items-start justify-between mb-5">
-            <div className="flex items-center gap-3">
+          <div className="flex items-start justify-between gap-4 mb-5">
+            <div className="flex items-center gap-3 min-w-0">
               {carrierAvatar ? (
                 <div className="w-9 h-9 rounded-full overflow-hidden bg-gray-200 shrink-0 relative">
                   <Image
@@ -199,8 +199,8 @@ export default async function QuoteDetailPage({ params }) {
                   {carrier?.public_name?.[0]?.toUpperCase() ?? 'C'}
                 </div>
               )}
-              <div>
-                <p className="font-bold text-gray-900 text-[15px]">
+              <div className="min-w-0">
+                <p className="font-bold text-gray-900 text-[15px] break-words">
                   {carrier?.public_name ?? 'Carrier'}
                 </p>
                 {carrier?.application_status === 'active' && (
@@ -217,7 +217,7 @@ export default async function QuoteDetailPage({ params }) {
                 </Link>
               </div>
             </div>
-            <div className="text-right">
+            <div className="text-right shrink-0">
               <p className="text-2xl font-bold text-gray-900">
                 ${Number(quote.price).toLocaleString('en-NZ')}
               </p>
@@ -313,7 +313,7 @@ export default async function QuoteDetailPage({ params }) {
             <h3 className="text-base font-bold text-gray-900 mb-2">
               Who you&apos;ll be booking
             </h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed break-words">
               {carrier?.profile_description ??
                 `${carrier?.public_name ?? 'This carrier'} provides professional moving services across New Zealand with a customer-focused approach and competitive pricing.`}
             </p>
@@ -322,30 +322,30 @@ export default async function QuoteDetailPage({ params }) {
           {/* Detail rows */}
           <div className="border-t border-gray-100 my-5" />
           <div className="divide-y divide-gray-100">
-            <div className="flex items-start justify-between py-3 text-sm">
-              <span className="text-gray-400 shrink-0 w-36">Time frame</span>
-              <span className="text-gray-700 text-right">
+            <div className="flex items-start justify-between gap-3 py-3 text-sm">
+              <span className="text-gray-400 shrink-0 w-28 sm:w-36">Time frame</span>
+              <span className="text-gray-700 text-right min-w-0 break-words">
                 {formatCollectionWindow(quote)}
               </span>
             </div>
 
             {paymentTimeframes.length > 0 && (
-              <div className="flex items-start justify-between py-3 text-sm">
-                <span className="text-gray-400 shrink-0 w-36">
+              <div className="flex items-start justify-between gap-3 py-3 text-sm">
+                <span className="text-gray-400 shrink-0 w-28 sm:w-36">
                   Payment option
                 </span>
-                <span className="text-gray-700 text-right">
+                <span className="text-gray-700 text-right min-w-0 break-words">
                   {paymentTimeframes.join(' · ')}
                 </span>
               </div>
             )}
 
             {paymentMethods.length > 0 && (
-              <div className="flex items-start justify-between py-3 text-sm">
-                <span className="text-gray-400 shrink-0 w-36">
+              <div className="flex items-start justify-between gap-3 py-3 text-sm">
+                <span className="text-gray-400 shrink-0 w-28 sm:w-36">
                   Payment method
                 </span>
-                <span className="text-gray-700 text-right">
+                <span className="text-gray-700 text-right min-w-0 break-words">
                   {paymentMethods.join(' · ')}
                 </span>
               </div>
@@ -380,8 +380,8 @@ export default async function QuoteDetailPage({ params }) {
                   <span className="text-3xl text-gray-200 font-black leading-none select-none">
                     &ldquo;&ldquo;
                   </span>
-                  <div>
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                  <div className="min-w-0">
+                    <p className="text-sm text-gray-700 leading-relaxed break-words">
                       {recentReview.comment}
                     </p>
                     <p className="text-xs text-gray-400 mt-2">
@@ -411,7 +411,7 @@ export default async function QuoteDetailPage({ params }) {
         </div>
 
         {/* ── Right sticky column ── */}
-        <div className="sticky top-6">
+        <div className="order-first lg:order-none lg:sticky lg:top-6">
           <div className="border border-gray-200 rounded-2xl p-5 bg-white shadow-sm">
             <p className="text-3xl font-bold text-gray-900">
               ${Number(quote.price).toLocaleString('en-NZ')}

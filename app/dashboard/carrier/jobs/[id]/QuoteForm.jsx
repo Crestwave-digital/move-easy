@@ -91,7 +91,7 @@ export default function QuoteForm({ jobId, existingQuote, walletBalance }) {
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
       <h2 className="text-lg font-bold mb-5">Submit your quote</h2>
 
       <div className="space-y-4">

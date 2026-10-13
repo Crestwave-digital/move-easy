@@ -279,14 +279,14 @@ const AddressAutocomplete = memo(function AddressAutocomplete({
             listId={listId}
           />
         )}
-      </div>
 
-      {/* Empty state (shown when search yields no results) */}
-      {isOpen && !loading && suggestions.length === 0 && value.trim().length >= 3 && (
-        <div className="absolute z-50 mt-1 w-full rounded-xl border border-gray-200 bg-white py-3 text-center text-sm text-gray-400 shadow-lg">
-          No addresses found.
-        </div>
-      )}
+        {/* Empty state (shown when search yields no results) */}
+        {isOpen && !loading && suggestions.length === 0 && value.trim().length >= 3 && (
+          <div className="absolute left-0 right-0 top-full z-50 mt-1 rounded-xl border border-gray-200 bg-white py-3 text-center text-sm text-gray-400 shadow-lg">
+            No addresses found.
+          </div>
+        )}
+      </div>
 
       {/* Error message */}
       {error && (

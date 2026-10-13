@@ -146,8 +146,8 @@ export default async function CustomerJobDetailPage({ params }) {
   return (
     <div className="max-w-3xl mx-auto px-4 pb-10 pt-8">
       {/* Job title */}
-      <h1 className="text-2xl font-bold text-gray-900 mb-1">{jobTypeLabel}</h1>
-      <p className="text-sm text-gray-400 mb-6">
+      <h1 className="text-2xl font-bold text-gray-900 mb-1 break-words">{jobTypeLabel}</h1>
+      <p className="text-sm text-gray-400 mb-6 break-words">
         {job.pickup_address?.split(',')[0]} →{' '}
         {job.delivery_address?.split(',')[0]}
       </p>
@@ -157,7 +157,7 @@ export default async function CustomerJobDetailPage({ params }) {
         <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 capitalize">
           {job.type.replace(/_/g, ' ')}
         </span>
-        <p className="text-sm font-medium">
+        <p className="text-sm font-medium break-words">
           {job.pickup_address} → {job.delivery_address}
         </p>
         <p className="text-xs text-gray-400 mt-1 capitalize">
@@ -206,7 +206,7 @@ export default async function CustomerJobDetailPage({ params }) {
           <p className="font-semibold text-green-800 mb-3">
             ✅ Booking confirmed — contact details revealed
           </p>
-          <div className="space-y-1 text-sm text-green-700">
+          <div className="space-y-1 text-sm text-green-700 break-words">
             <p>
               Carrier: <strong>{carrierContact.public_name}</strong>
             </p>
@@ -249,13 +249,13 @@ export default async function CustomerJobDetailPage({ params }) {
         <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1 capitalize">
           {job.type?.replace(/_/g, ' ')}
         </p>
-        <h2 className="text-3xl font-black text-gray-900">
+        <h2 className="text-2xl sm:text-3xl font-black text-gray-900">
           My delivery details
         </h2>
       </div>
 
       {/* Map + Collection / Delivery grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 [&>*]:min-w-0">
         {/* Map */}
         <ShipmentMap
           pickupAddress={job.pickup_address}
@@ -276,9 +276,9 @@ export default async function CustomerJobDetailPage({ params }) {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-900">Address</p>
-                  <p className="text-sm text-gray-600">{job.pickup_address}</p>
+                  <p className="text-sm text-gray-600 break-words">{job.pickup_address}</p>
                   {job.pickup_floor && (
                     <p className="text-xs text-blue-600 mt-0.5">
                       • {job.pickup_floor}
@@ -288,7 +288,7 @@ export default async function CustomerJobDetailPage({ params }) {
               </div>
               <div className="flex items-start gap-3">
                 <Calendar size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-900">
                     {job.move_date_type === 'between' ? 'Collection date' : 'Move date'}
                   </p>
@@ -300,7 +300,7 @@ export default async function CustomerJobDetailPage({ params }) {
               {job.item_loading && (
                 <div className="flex items-start gap-3">
                   <Users size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-gray-900">
                       Loading
                     </p>
@@ -319,9 +319,9 @@ export default async function CustomerJobDetailPage({ params }) {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-900">Address</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-600 break-words">
                     {job.delivery_address}
                   </p>
                   {job.delivery_floor && (
@@ -334,7 +334,7 @@ export default async function CustomerJobDetailPage({ params }) {
               {deliveryDateDisplay && (
                 <div className="flex items-start gap-3">
                   <Calendar size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-gray-900">
                       Delivery date
                     </p>
@@ -347,7 +347,7 @@ export default async function CustomerJobDetailPage({ params }) {
               {job.item_unloading && (
                 <div className="flex items-start gap-3">
                   <Users size={18} className="text-gray-400 mt-0.5 shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-gray-900">
                       Unloading
                     </p>
@@ -373,7 +373,7 @@ export default async function CustomerJobDetailPage({ params }) {
               {job.description && (
                 <p className="text-sm text-gray-500 mb-3">{job.description}</p>
               )}
-              <div className="bg-gray-50 rounded-lg px-4 py-3 flex flex-wrap gap-6 text-sm text-gray-500">
+              <div className="bg-gray-50 rounded-lg px-4 py-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500">
                 <span>
                   Weight {item.weight_kg ? `${item.weight_kg}kg` : '—'}
                 </span>
@@ -434,10 +434,10 @@ export default async function CustomerJobDetailPage({ params }) {
             year: 'numeric',
           })}
         </p>
-        <div className="flex flex-col gap-3 max-w-xs">
+        <div className="flex flex-col gap-3 sm:max-w-xs">
           <Link
             href="/get-prices"
-            className="bg-gray-900 text-white text-sm font-semibold px-5 py-2.5 rounded-lg text-center hover:bg-gray-700 transition-colors"
+            className="bg-gray-900 text-white text-sm font-semibold px-5 py-3 sm:py-2.5 rounded-lg text-center hover:bg-gray-700 transition-colors"
           >
             Create new request
           </Link>

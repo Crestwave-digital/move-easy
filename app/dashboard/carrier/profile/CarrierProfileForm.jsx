@@ -161,7 +161,7 @@ export default function CarrierProfileForm({ carrier }) {
       )}
 
       {/* Section 1 — Public profile */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
         <h2 className="font-bold text-gray-900 mb-6">Public Profile</h2>
 
         <div className="space-y-5">
@@ -236,7 +236,7 @@ export default function CarrierProfileForm({ carrier }) {
       </div>
 
       {/* Section 2 — Company details (read-only) */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
         <h2 className="font-bold text-gray-900 mb-6">Company Details</h2>
         <div className="divide-y divide-gray-100">
           {[
@@ -251,10 +251,10 @@ export default function CarrierProfileForm({ carrier }) {
           ].map((row) => (
             <div
               key={row.label}
-              className="flex items-center justify-between py-3 text-sm"
+              className="flex items-center justify-between gap-4 py-3 text-sm"
             >
               <span className="text-gray-400">{row.label}</span>
-              <span className="text-gray-700 font-medium">
+              <span className="min-w-0 break-words text-right text-gray-700 font-medium">
                 {row.value || '—'}
               </span>
             </div>

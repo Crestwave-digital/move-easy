@@ -52,9 +52,9 @@ function AdminLoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
           <h1 className="text-xl font-bold text-gray-900 mb-1">Admin Login</h1>
           <p className="text-sm text-gray-500 mb-6">
             Sign in to manage carriers and jobs.

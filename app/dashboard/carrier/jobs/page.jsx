@@ -95,21 +95,21 @@ export default async function CarrierJobsPage() {
             <Link
               key={job.id}
               href={`/dashboard/carrier/jobs/${job.id}`}
-              className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-teal-500 hover:shadow-sm transition-all"
+              className="block bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:border-teal-500 hover:shadow-sm transition-all"
             >
               <div className="flex justify-between items-start gap-4">
-                <div>
+                <div className="min-w-0">
                   <span className="inline-block mb-3 px-3 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-semibold capitalize">
                     {job.type?.replace('_', ' ')}
                   </span>
 
-                  <p className="font-medium text-gray-800">
+                  <p className="break-words font-medium text-gray-800">
                     Pickup: {getShortAddress(job.pickup_address)}
                   </p>
 
                   <p className="text-gray-400 text-sm my-1">↓</p>
 
-                  <p className="font-medium text-gray-800">
+                  <p className="break-words font-medium text-gray-800">
                     Delivery: {getShortAddress(job.delivery_address)}
                   </p>
 
@@ -122,7 +122,7 @@ export default async function CarrierJobsPage() {
                   </p>
                 </div>
 
-                <div className="text-sm text-teal-600 font-medium">View →</div>
+                <div className="shrink-0 text-sm text-teal-600 font-medium">View →</div>
               </div>
             </Link>
           ))}

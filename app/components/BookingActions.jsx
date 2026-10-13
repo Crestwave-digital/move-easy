@@ -18,7 +18,7 @@ export default function BookingActions({ bookingId, role, size = 'md' }) {
         <button
           onClick={() => setModal('complete')}
           className={`inline-flex items-center gap-1.5 rounded-lg bg-teal-600 font-semibold text-white hover:bg-teal-700 ${
-            small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+            small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2.5 sm:py-2 text-sm'
           }`}
         >
           <CheckCircle2 size={small ? 13 : 15} />
@@ -27,7 +27,7 @@ export default function BookingActions({ bookingId, role, size = 'md' }) {
         <button
           onClick={() => setModal('cancel')}
           className={`inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white font-medium text-gray-600 hover:border-red-200 hover:bg-red-50 hover:text-red-600 ${
-            small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+            small ? 'px-3 py-1.5 text-xs' : 'px-4 py-2.5 sm:py-2 text-sm'
           }`}
         >
           <XCircle size={small ? 13 : 15} />
@@ -90,18 +90,18 @@ function CompleteModal({ bookingId, role, onClose }) {
           : 'Confirm the move has been done. The customer will be asked to leave a review.'}
       </p>
       {error && <p className="mt-3 text-xs text-red-600">{error}</p>}
-      <div className="mt-5 flex gap-2">
+      <div className="mt-5 flex flex-wrap gap-2">
         <button
           onClick={() => run({}, () => 'Job marked as complete')}
           disabled={busy}
-          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-50"
+          className="rounded-lg bg-teal-600 px-4 py-2.5 sm:py-2 text-sm font-semibold text-white hover:bg-teal-700 disabled:opacity-50"
         >
           {busy ? 'Saving…' : 'Yes, the work is done'}
         </button>
         <button
           onClick={onClose}
           disabled={busy}
-          className="rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-100"
+          className="rounded-lg px-3 py-2.5 sm:py-2 text-sm text-gray-500 hover:bg-gray-100"
         >
           Not yet
         </button>
@@ -172,18 +172,18 @@ function CancelModal({ bookingId, role, onClose }) {
       </label>
 
       {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
-      <div className="mt-4 flex gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         <button
           onClick={save}
           disabled={busy || !reason.trim()}
-          className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-50"
+          className="rounded-lg bg-red-600 px-4 py-2.5 sm:py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-50"
         >
           {busy ? 'Cancelling…' : 'Cancel booking'}
         </button>
         <button
           onClick={onClose}
           disabled={busy}
-          className="rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-100"
+          className="rounded-lg px-3 py-2.5 sm:py-2 text-sm text-gray-500 hover:bg-gray-100"
         >
           Keep booking
         </button>
@@ -204,13 +204,13 @@ function Modal({ title, onClose, children }) {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-gray-900/40 p-4"
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div role="dialog" aria-modal="true" aria-label={title} className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl">
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-base font-bold text-gray-900">{title}</h3>
+      <div role="dialog" aria-modal="true" aria-label={title} className="w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-5 shadow-xl">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <h3 className="min-w-0 text-base font-bold text-gray-900">{title}</h3>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
+            className="shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
           >
             <X size={18} />
           </button>

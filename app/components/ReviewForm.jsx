@@ -36,8 +36,8 @@ export default function ReviewForm({ bookingId, carrierName }) {
   }
 
   return (
-    <div id="review" className="bg-white rounded-xl border p-6 scroll-mt-24">
-      <h2 className="font-bold text-lg mb-4">
+    <div id="review" className="bg-white rounded-xl border p-4 sm:p-6 scroll-mt-24">
+      <h2 className="font-bold text-lg mb-4 break-words">
         How was your move{carrierName ? ` with ${carrierName}` : ''}?
       </h2>
       <div className="mb-4">

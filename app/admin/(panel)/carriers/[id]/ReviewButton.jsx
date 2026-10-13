@@ -37,7 +37,7 @@ export default function ReviewButton({ type, id, carrierId }) {
   }
 
   return (
-    <div className="flex gap-2 flex-shrink-0">
+    <div className="flex flex-wrap gap-2 flex-shrink-0">
       <button
         onClick={() => handleReview('approved')}
         disabled={loading !== null}

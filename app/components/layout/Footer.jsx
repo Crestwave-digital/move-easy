@@ -65,10 +65,10 @@ export default function Footer() {
   return (
     <footer className="bg-white text-black">
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-6 gap-y-8 sm:gap-10">
           {/* Company Info */}
-          <div className="sm:col-span-2 lg:col-span-4">
+          <div className="col-span-2 lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/main/move_eazy_logo.png"
@@ -159,7 +159,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <a
             href="https://crestwave.com.au/"
             target="_blank"

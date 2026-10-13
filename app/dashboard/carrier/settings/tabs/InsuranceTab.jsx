@@ -106,7 +106,7 @@ export default function InsuranceTab({ carrierId, insurance: initial }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-bold text-gray-900">Insurance</h2>
         {!showAdd && (
@@ -161,9 +161,9 @@ export default function InsuranceTab({ carrierId, insurance: initial }) {
             <label className="block text-xs font-medium text-gray-500 mb-1">
               Proof of policy
             </label>
-            <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-              <Upload size={14} />
-              {proofFile ? proofFile.name : 'Upload file'}
+            <label className="inline-flex max-w-full items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 cursor-pointer transition-colors sm:py-2">
+              <Upload size={14} className="shrink-0" />
+              <span className="truncate">{proofFile ? proofFile.name : 'Upload file'}</span>
               <input
                 key={fileInputKey}
                 type="file"
@@ -188,14 +188,14 @@ export default function InsuranceTab({ carrierId, insurance: initial }) {
             <button
               type="button"
               onClick={() => setShowAdd(false)}
-              className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700"
+              className="px-4 py-2.5 text-sm text-gray-500 hover:text-gray-700 sm:py-2"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting || uploading}
-              className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg sm:flex-none sm:py-2 hover:bg-gray-700 disabled:opacity-50"
             >
               {uploading ? 'Uploading…' : 'Add policy'}
             </button>
@@ -219,7 +219,7 @@ export default function InsuranceTab({ carrierId, insurance: initial }) {
             <div className="flex items-center gap-3 min-w-0">
               <Shield size={18} className="text-gray-400 shrink-0" />
               <div className="min-w-0">
-                <p className="text-sm font-medium text-gray-900">
+                <p className="break-words text-sm font-medium text-gray-900">
                   {p.provider_name}
                 </p>
                 {p.coverage_amount && (
@@ -229,11 +229,11 @@ export default function InsuranceTab({ carrierId, insurance: initial }) {
                 )}
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-3">
               {statusBadge(p.status)}
               <button
                 onClick={() => handleDelete(p.id)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className="-mr-2 p-2 text-gray-400 hover:text-red-500 transition-colors sm:m-0 sm:p-0"
               >
                 <Trash2 size={16} />
               </button>

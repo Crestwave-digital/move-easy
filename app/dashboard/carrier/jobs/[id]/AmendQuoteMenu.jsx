@@ -64,19 +64,19 @@ export default function AmendQuoteMenu({ quote, defaults, lowestOther }) {
       <button
         onClick={() => setMenuOpen((o) => !o)}
         aria-expanded={menuOpen}
-        className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-700"
+        className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm sm:py-2 hover:bg-teal-700"
       >
         Amend quote
         <ChevronDown size={15} className={`transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {menuOpen && (
-        <div className="absolute right-0 z-20 mt-1.5 w-60 overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg">
+        <div className="absolute right-0 z-20 mt-1.5 w-60 max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-gray-200 bg-white py-1 shadow-lg">
           {ITEMS.map(({ key, label, icon: Icon }) => (
             <button
               key={key}
               onClick={() => open(key)}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50"
+              className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-sm sm:py-2 text-gray-700 hover:bg-gray-50"
             >
               <Icon size={15} className="text-gray-400" />
               {label}
@@ -85,7 +85,7 @@ export default function AmendQuoteMenu({ quote, defaults, lowestOther }) {
           <div className="my-1 border-t border-gray-100" />
           <button
             onClick={() => open('withdraw')}
-            className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+            className="flex w-full items-center gap-2.5 px-3 py-2.5 text-left text-sm sm:py-2 text-red-600 hover:bg-red-50"
           >
             <XCircle size={15} />
             Withdraw quote
@@ -174,7 +174,7 @@ function Modal({ title, onClose, children, footer }) {
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl"
+        className="max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-2xl bg-white p-5 shadow-xl"
       >
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-base font-bold text-gray-900">{title}</h3>

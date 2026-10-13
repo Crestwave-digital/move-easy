@@ -56,7 +56,41 @@ export default async function AdminTransactionsPage() {
           No transactions yet.
         </p>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <>
+        {/* Mobile: stacked cards */}
+        <div className="md:hidden bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+          {transactions.map((tx) => (
+            <div key={tx.id} className="p-4">
+              <div className="flex items-start justify-between gap-3">
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${TYPE_STYLES[tx.type] ?? 'bg-gray-100 text-gray-500'}`}>
+                  {TYPE_LABELS[tx.type] ?? tx.type}
+                </span>
+                <span className={`shrink-0 font-bold ${tx.type === 'topup' ? 'text-green-600' : 'text-red-500'}`}>
+                  {tx.type === 'topup' ? '+' : '-'}${Number(tx.amount).toFixed(2)}
+                </span>
+              </div>
+              {tx.description && (
+                <p className="mt-2 text-sm text-gray-500 break-words">{tx.description}</p>
+              )}
+              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+                <span className="font-mono">
+                  {tx.carrier_id ? tx.carrier_id.slice(0, 8) + '...' : '—'}
+                </span>
+                <span>
+                  {new Date(tx.created_at).toLocaleDateString('en-NZ', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden md:block bg-white rounded-xl border border-gray-200 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-100 bg-gray-50">
@@ -100,6 +134,7 @@ export default async function AdminTransactionsPage() {
             </tbody>
           </table>
         </div>
+        </>
       )}
     </div>
   )

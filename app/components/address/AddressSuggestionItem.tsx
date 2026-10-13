@@ -41,7 +41,7 @@ function SubLabel({ suggestion }: { suggestion: AddressSuggestion }) {
   )
   if (parts.length === 0) return null
   return (
-    <span className="text-xs text-gray-400 truncate">{parts.join(', ')}</span>
+    <span className="block text-xs text-gray-400 truncate">{parts.join(', ')}</span>
   )
 }
 
@@ -94,7 +94,7 @@ const AddressSuggestionItem = memo(function AddressSuggestionItem({
 
       {/* Text */}
       <div className="min-w-0 flex-1">
-        <span className="block truncate font-medium">
+        <span className="block break-words font-medium sm:truncate">
           {suggestion.address}
         </span>
         <SubLabel suggestion={suggestion} />

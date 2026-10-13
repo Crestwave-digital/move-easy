@@ -38,7 +38,7 @@ export default async function AdminJobsPage() {
       <h1 className="text-xl font-bold mb-2">All Jobs</h1>
       <p className="text-sm text-gray-400 mb-8">Every job posted on the platform.</p>
 
-      <div className="grid grid-cols-5 gap-3 mb-8">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-8">
         {[
           { label: 'Total', count: total, style: 'bg-gray-50 text-gray-700' },
           { label: 'Open', count: byStatus('open'), style: 'bg-blue-50 text-blue-700' },
@@ -46,7 +46,7 @@ export default async function AdminJobsPage() {
           { label: 'Booked', count: byStatus('booked'), style: 'bg-green-50 text-green-700' },
           { label: 'Completed', count: byStatus('completed'), style: 'bg-gray-50 text-gray-500' },
         ].map((s) => (
-          <div key={s.label} className={`rounded-xl p-4 text-center ${s.style}`}>
+          <div key={s.label} className={`rounded-xl p-3 sm:p-4 text-center ${s.style}`}>
             <p className="text-2xl font-bold">{s.count}</p>
             <p className="text-xs font-medium mt-1">{s.label}</p>
           </div>
@@ -56,7 +56,50 @@ export default async function AdminJobsPage() {
       {!jobs?.length ? (
         <p className="text-center py-20 text-gray-400 text-sm">No jobs yet.</p>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <>
+        {/* Mobile: stacked cards */}
+        <div className="md:hidden space-y-3">
+          {jobs.map((job) => {
+            const pickupCity = job.pickup_address?.split(',')[0]?.trim()
+            const deliveryCity = job.delivery_address?.split(',')[0]?.trim()
+            const quoteCount = job.quotes?.[0]?.count ?? 0
+
+            return (
+              <div key={job.id} className="bg-white rounded-xl border border-gray-200 p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full capitalize">
+                    {job.type?.replace(/_/g, ' ')}
+                  </span>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full capitalize ${STATUS_STYLES[job.status] ?? 'bg-gray-100 text-gray-500'}`}>
+                    {job.status}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm font-medium text-gray-700 break-words">
+                  {pickupCity} → {deliveryCity}
+                </p>
+                <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400">
+                  <span>
+                    {quoteCount} {quoteCount === 1 ? 'quote' : 'quotes'}
+                  </span>
+                  <span>
+                    {new Date(job.created_at).toLocaleDateString('en-NZ', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </span>
+                </div>
+                {bookingByJob[job.id] && (
+                  <div className="mt-3">
+                    <BookingActions bookingId={bookingByJob[job.id]} role="admin" size="sm" />
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="hidden md:block bg-white rounded-xl border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -114,6 +157,7 @@ export default async function AdminJobsPage() {
             </table>
           </div>
         </div>
+        </>
       )}
     </div>
   )

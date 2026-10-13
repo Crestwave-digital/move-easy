@@ -241,11 +241,11 @@ export default function ReviewsPage() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-10 rounded-2xl border border-zinc-200 p-6 flex items-center gap-5">
+        <div className="mt-10 rounded-2xl border border-zinc-200 p-5 sm:p-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5">
           <div className="flex-shrink-0 w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-white text-xl">
             ♥
           </div>
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             <p className="font-bold text-zinc-900">Thousands of happy customers</p>
             <p className="text-sm text-zinc-500">
               Join thousands of Kiwis who trust Moving Easy for their moving and delivery needs.

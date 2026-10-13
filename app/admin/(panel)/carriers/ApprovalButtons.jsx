@@ -60,7 +60,7 @@ export default function ApprovalButtons({ carrierId, currentStatus }) {
   }
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {/* Pending → show Approve (with email) + Reject */}
       {currentStatus === 'pending' && (
         <>

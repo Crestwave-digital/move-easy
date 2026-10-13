@@ -40,10 +40,10 @@ export default async function CarrierProfilePage({ params }) {
   const carrierPhotos = carrier.photos ?? []
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-8 sm:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 items-start">
         {/* ── Left column ── */}
-        <div>
+        <div className="min-w-0">
           {/* Hero image */}
           {carrierPhotos[0] && (
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden mb-6 bg-gray-100">
@@ -78,7 +78,7 @@ export default async function CarrierProfilePage({ params }) {
           )}
 
           {/* Header */}
-          <h1 className="text-3xl font-black text-gray-900 mb-1">
+          <h1 className="text-2xl sm:text-3xl font-black text-gray-900 mb-1 break-words">
             {carrier.public_name}
           </h1>
           {carrier.application_status === 'active' && (
@@ -149,7 +149,7 @@ export default async function CarrierProfilePage({ params }) {
             <h3 className="text-base font-bold text-gray-900 mb-2">
               Who you&apos;ll be booking
             </h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-gray-500 leading-relaxed break-words">
               {carrier.profile_description ??
                 `${carrier.public_name} provides professional moving services across New Zealand with a customer-focused approach and competitive pricing.`}
             </p>
@@ -228,9 +228,9 @@ export default async function CarrierProfilePage({ params }) {
                         <span className="w-10 h-10 bg-gray-900 text-white rounded-lg font-black text-lg flex items-center justify-center shrink-0">
                           {r.rating}
                         </span>
-                        <div>
+                        <div className="min-w-0">
                           {route && (
-                            <p className="text-xs text-gray-500 font-medium">
+                            <p className="text-xs text-gray-500 font-medium break-words">
                               {route}
                             </p>
                           )}
@@ -242,7 +242,7 @@ export default async function CarrierProfilePage({ params }) {
                           <span className="text-3xl text-gray-200 font-black leading-none select-none">
                             &ldquo;&ldquo;
                           </span>
-                          <p className="text-sm text-gray-600 italic leading-relaxed">
+                          <p className="min-w-0 text-sm text-gray-600 italic leading-relaxed break-words">
                             {r.comment}
                           </p>
                         </div>
@@ -261,11 +261,11 @@ export default async function CarrierProfilePage({ params }) {
         </div>
 
         {/* ── Right sticky column ── */}
-        <div className="sticky top-6 self-start">
-          <div className="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm">
+        <div className="min-w-0 lg:sticky lg:top-6 self-start">
+          <div className="border border-gray-200 rounded-2xl p-5 sm:p-6 bg-white shadow-sm">
             {avgRating ? (
               <>
-                <p className="text-6xl font-black text-gray-900 leading-none">
+                <p className="text-5xl sm:text-6xl font-black text-gray-900 leading-none">
                   {avgRating}
                 </p>
                 <p className="text-sm text-gray-400 mt-1 mb-5">

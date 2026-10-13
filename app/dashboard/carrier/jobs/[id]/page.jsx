@@ -44,7 +44,7 @@ export default async function CarrierJobDetailPage({ params }) {
   // Pending/rejected carriers cannot quote — show gate instead
   if (carrier?.application_status !== 'active') {
     return (
-      <div className="max-w-lg mx-auto px-4 py-24 text-center">
+      <div className="max-w-lg mx-auto px-4 py-12 text-center sm:py-24">
         <div className="text-5xl mb-6">⏳</div>
         <h1 className="text-2xl font-bold mb-3">
           {carrier?.application_status === 'pending'
@@ -180,7 +180,7 @@ export default async function CarrierJobDetailPage({ params }) {
         </JobBids>
       )}
 
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6 sm:p-6">
         <span className="inline-block bg-teal-50 text-teal-700 text-xs font-semibold px-3 py-1 rounded-full mb-4 capitalize">
           {job.type.replace('_', ' ')}
         </span>
@@ -192,10 +192,10 @@ export default async function CarrierJobDetailPage({ params }) {
               A
             </div>
 
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-gray-400 mb-1">Pickup</p>
 
-              <p className="text-sm font-medium text-gray-800">
+              <p className="break-words text-sm font-medium text-gray-800">
                 {getShortAddress(job.pickup_address)}
               </p>
             </div>
@@ -206,10 +206,10 @@ export default async function CarrierJobDetailPage({ params }) {
               B
             </div>
 
-            <div>
+            <div className="min-w-0">
               <p className="text-xs text-gray-400 mb-1">Delivery</p>
 
-              <p className="text-sm font-medium text-gray-800">
+              <p className="break-words text-sm font-medium text-gray-800">
                 {getShortAddress(job.delivery_address)}
               </p>
             </div>
@@ -236,7 +236,7 @@ export default async function CarrierJobDetailPage({ params }) {
               {job.job_items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center gap-2 text-sm text-gray-700"
+                  className="flex flex-wrap items-center gap-x-2 text-sm text-gray-700"
                 >
                   <span className="text-gray-400">{item.quantity}x</span>
 
@@ -278,7 +278,7 @@ export default async function CarrierJobDetailPage({ params }) {
               Notes
             </p>
 
-            <p className="text-sm text-gray-600 leading-relaxed">
+            <p className="whitespace-pre-line break-words text-sm text-gray-600 leading-relaxed">
               {job.description}
             </p>
           </div>
@@ -286,7 +286,7 @@ export default async function CarrierJobDetailPage({ params }) {
       </div>
 
       {['open', 'quoted'].includes(job.status) && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 text-sm text-amber-800 flex items-center gap-2">
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 text-sm text-amber-800 flex items-start gap-2 sm:items-center">
           🔒 Customer contact details will be revealed once your quote is
           accepted.
         </div>

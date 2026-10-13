@@ -36,13 +36,13 @@ export default function CancelJobButton({ jobId }) {
           <button
             onClick={cancel}
             disabled={loading}
-            className="bg-red-500 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-red-600 disabled:opacity-50"
+            className="flex-1 sm:flex-none bg-red-500 text-white text-sm font-semibold px-4 py-2.5 sm:py-2 rounded-lg hover:bg-red-600 disabled:opacity-50"
           >
             {loading ? 'Cancelling...' : 'Yes, cancel'}
           </button>
           <button
             onClick={() => setConfirm(false)}
-            className="border border-gray-300 text-sm px-4 py-2 rounded-lg hover:bg-gray-50"
+            className="flex-1 sm:flex-none border border-gray-300 text-sm px-4 py-2.5 sm:py-2 rounded-lg hover:bg-gray-50"
           >
             Keep it
           </button>

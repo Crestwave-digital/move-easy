@@ -43,12 +43,12 @@ export default async function CustomerDashboardPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 pb-16 pt-10">
       {/* Greeting */}
-      <h1 className="text-5xl font-black text-gray-900 mb-8">
+      <h1 className="text-3xl sm:text-5xl font-black text-gray-900 mb-6 sm:mb-8 break-words">
         Hi {profile?.first_name}
       </h1>
 
       {/* Sub-nav */}
-      <nav className="flex gap-6 border-b border-gray-200 mb-8">
+      <nav className="flex gap-4 sm:gap-6 border-b border-gray-200 mb-8 whitespace-nowrap overflow-x-auto">
         <Link
           href="/get-prices"
           className="pb-3 text-sm text-gray-500 hover:text-gray-900"
@@ -108,18 +108,18 @@ export default async function CustomerDashboardPage() {
               <Link
                 key={job.id}
                 href={`/dashboard/jobs/${job.id}`}
-                className="flex items-center justify-between py-5 hover:bg-gray-50 px-2 rounded-lg transition-colors"
+                className="flex items-center justify-between gap-3 py-5 hover:bg-gray-50 px-2 rounded-lg transition-colors"
               >
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold text-gray-900 capitalize mb-1">
                     {job.type?.replace(/_/g, ' ')}
                   </p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-400 break-words">
                     {job.pickup_address?.split(',')[0]} →{' '}
                     {job.delivery_address?.split(',')[0]}
                   </p>
                 </div>
-                <div className="text-right">
+                <div className="text-right shrink-0">
                   {pendingQuotes.length > 0 ? (
                     <div>
                       <span className="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full mb-1">

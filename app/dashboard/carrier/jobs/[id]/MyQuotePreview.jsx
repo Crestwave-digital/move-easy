@@ -49,7 +49,7 @@ export default function MyQuotePreview({
         </p>
       </div>
 
-      <div className="grid gap-6 px-5 pb-5 sm:grid-cols-[1fr_220px]">
+      <div className="grid gap-6 px-4 pb-4 sm:grid-cols-[1fr_220px] sm:px-5 sm:pb-5">
         {/* Left: who + details */}
         <div className="min-w-0">
           <div className="mb-4 flex items-center gap-2.5">
@@ -253,7 +253,7 @@ function Row({ label, value }) {
   return (
     <div className="flex items-start justify-between gap-4 py-2.5">
       <dt className="shrink-0 text-gray-500">{label}</dt>
-      <dd className="text-right text-gray-800">{value}</dd>
+      <dd className="min-w-0 break-words text-right text-gray-800">{value}</dd>
     </div>
   )
 }

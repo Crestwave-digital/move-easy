@@ -35,14 +35,14 @@ export default async function CarrierDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 pb-10 pt-8">
+      <div className="max-w-4xl mx-auto pb-10 pt-2 sm:px-4 sm:pt-8">
         {/* Header */}
-        <div className="mb-8 flex items-start justify-between">
+        <div className="mb-8 flex flex-wrap items-start justify-between gap-3">
           <div className="bg-gray-900 text-white rounded-xl px-4 py-2 text-sm">
             💰 ${carrier?.wallet_balance?.toFixed(2) ?? '0.00'}
           </div>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+          <div className="order-first w-full min-w-0 sm:order-none sm:w-auto">
+            <h1 className="break-words text-2xl font-bold text-gray-900">
               {carrier?.public_name || profile?.first_name} 👋
             </h1>
             <p className="text-sm text-gray-500 mt-1">Carrier dashboard</p>
@@ -81,30 +81,30 @@ export default async function CarrierDashboardPage() {
         <QuickActions />
 
         {/* Profile summary */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
           <h2 className="font-semibold text-gray-800 mb-4">Your profile</h2>
-          <div className="grid grid-cols-2 gap-3 text-sm">
+          <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
             <div>
               <p className="text-gray-400 text-xs">Name</p>
-              <p className="text-gray-700 font-medium">
+              <p className="break-words text-gray-700 font-medium">
                 {profile?.first_name} {profile?.last_name}
               </p>
             </div>
             <div>
               <p className="text-gray-400 text-xs">City</p>
-              <p className="text-gray-700 font-medium">
+              <p className="break-words text-gray-700 font-medium">
                 {carrier?.city || '—'}
               </p>
             </div>
             <div>
               <p className="text-gray-400 text-xs">Services</p>
-              <p className="text-gray-700 font-medium">
+              <p className="break-words text-gray-700 font-medium">
                 {carrier?.service_categories?.join(', ') || '—'}
               </p>
             </div>
             <div>
               <p className="text-gray-400 text-xs">Payment methods</p>
-              <p className="text-gray-700 font-medium">
+              <p className="break-words text-gray-700 font-medium">
                 {carrier?.payment_methods?.join(', ') || '—'}
               </p>
             </div>

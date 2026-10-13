@@ -11,7 +11,7 @@ export default function JobBids({ bids, title, children, defaultOpen = false }) 
 
   return (
     <section className="mb-6">
-      <div className="mb-3 flex items-baseline justify-between">
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3">
         <h2 className="text-lg font-bold text-gray-900">{title}</h2>
         <p className="text-xs text-gray-400">
           {bids.length} bid{bids.length === 1 ? '' : 's'} · cheapest first
@@ -37,7 +37,7 @@ export default function JobBids({ bids, title, children, defaultOpen = false }) 
                       }
                     : undefined
                 }
-                className={`flex items-center justify-between gap-3 rounded-lg px-4 py-2.5 text-sm transition-colors ${
+                className={`flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 sm:px-4 text-sm transition-colors ${
                   bid.isMine
                     ? `cursor-pointer border border-teal-500 bg-teal-50/60 hover:bg-teal-50 ${isOpen ? 'rounded-b-none' : ''}`
                     : 'border border-transparent bg-gray-100/80'
@@ -57,7 +57,7 @@ export default function JobBids({ bids, title, children, defaultOpen = false }) 
                     </span>
                   )}
                 </div>
-                <div className="flex shrink-0 items-center gap-3">
+                <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                   {bid.messages > 0 && (
                     <span className="inline-flex items-center gap-1 text-xs text-gray-400">
                       <MessageSquare size={12} />

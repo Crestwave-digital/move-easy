@@ -53,7 +53,7 @@ export default function TelephoneTab({ carrierId, telephones: initial }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-bold text-gray-900">Telephone Numbers</h2>
         {!showAdd && (
@@ -73,7 +73,7 @@ export default function TelephoneTab({ carrierId, telephones: initial }) {
           onSubmit={handleSubmit(onAdd)}
           className="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3"
         >
-          <div className="grid grid-cols-[100px_1fr_120px] gap-3">
+          <div className="grid grid-cols-[90px_1fr] gap-3 sm:grid-cols-[100px_1fr_120px]">
             <div>
               <label className="block text-xs font-medium text-gray-500 mb-1">
                 Code
@@ -99,7 +99,7 @@ export default function TelephoneTab({ carrierId, telephones: initial }) {
                 placeholder="e.g. 212345678"
               />
             </div>
-            <div>
+            <div className="col-span-2 sm:col-span-1">
               <label className="block text-xs font-medium text-gray-500 mb-1">
                 Type
               </label>
@@ -119,14 +119,14 @@ export default function TelephoneTab({ carrierId, telephones: initial }) {
             <button
               type="button"
               onClick={() => setShowAdd(false)}
-              className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700"
+              className="px-4 py-2.5 text-sm text-gray-500 hover:text-gray-700 sm:py-2"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 disabled:opacity-50"
+              className="flex-1 px-4 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-lg sm:flex-none sm:py-2 hover:bg-gray-700 disabled:opacity-50"
             >
               {isSubmitting ? 'Adding…' : 'Add'}
             </button>
@@ -157,7 +157,7 @@ export default function TelephoneTab({ carrierId, telephones: initial }) {
             </div>
             <button
               onClick={() => handleRemove(t.id)}
-              className="text-gray-400 hover:text-red-500 transition-colors"
+              className="-mr-2 p-2 text-gray-400 hover:text-red-500 transition-colors sm:m-0 sm:p-0"
             >
               <Trash2 size={16} />
             </button>

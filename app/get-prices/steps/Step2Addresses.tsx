@@ -106,7 +106,7 @@ export default function Step2Addresses({ wizard }) {
       <button
         type="button"
         onClick={prevStep}
-        className="mb-6 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
+        className="mb-4 sm:mb-6 -ml-1 sm:ml-0 px-1 sm:px-0 py-2 sm:py-0 flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition-colors"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
           <path fillRule="evenodd" clipRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" />
@@ -138,7 +138,7 @@ export default function Step2Addresses({ wizard }) {
         />
 
         {/* Floor + Loading side-by-side */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700">
               Collection floor level
@@ -180,7 +180,7 @@ export default function Step2Addresses({ wizard }) {
         />
 
         {/* Floor + Unloading side-by-side */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
             <label className="mb-1.5 block text-sm font-medium text-gray-700">
               Delivery floor level
@@ -216,14 +216,14 @@ export default function Step2Addresses({ wizard }) {
           <label className="mb-2 block text-sm font-medium text-gray-700">
             When do you need to move?
           </label>
-          <div className="flex gap-1.5">
+          <div className="grid grid-cols-2 gap-1.5 sm:flex">
             {DATE_TYPES.map((dt) => (
               <button
                 key={dt.value}
                 type="button"
                 onClick={() => update({ moveDateType: dt.value })}
                 className={
-                  `flex-1 rounded-lg border px-3 py-2 text-xs font-medium text-center transition-colors cursor-pointer ` +
+                  `flex-1 rounded-lg border px-3 py-2.5 sm:py-2 text-xs font-medium text-center transition-colors cursor-pointer ` +
                   (state.moveDateType === dt.value
                     ? 'border-blue-500 bg-blue-50 text-blue-700'
                     : 'border-gray-200 text-gray-500 hover:border-gray-300')

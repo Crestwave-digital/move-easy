@@ -66,7 +66,7 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col bg-background text-foreground" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col overflow-x-clip bg-background text-foreground" suppressHydrationWarning>
         <Providers>
           <Toaster position="top-right" richColors closeButton />
           <Navbar />

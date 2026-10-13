@@ -28,12 +28,12 @@ export default async function MyJobsPage() {
               href={`/dashboard/jobs/${job.id}`}
               className="block bg-white rounded-xl border border-gray-200 px-5 py-4 hover:border-blue-400 hover:shadow-sm transition-all"
             >
-              <div className="flex items-start justify-between">
-                <div>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
                   <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full mb-2 capitalize">
                     {job.type.replace('_', ' ')}
                   </span>
-                  <p className="text-sm font-medium text-gray-800">
+                  <p className="text-sm font-medium text-gray-800 break-words">
                     {job.pickup_address} → {job.delivery_address}
                   </p>
                   <p className="text-xs text-gray-400 mt-1 capitalize">

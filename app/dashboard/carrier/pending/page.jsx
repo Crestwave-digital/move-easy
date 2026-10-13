@@ -1,6 +1,6 @@
 export default function CarrierPendingPage() {
   return (
-    <main className="max-w-lg mx-auto px-4 py-24 text-center">
+    <main className="max-w-lg mx-auto px-4 py-12 text-center sm:py-24">
       <div className="text-5xl mb-6">⏳</div>
 
       <h1 className="text-2xl font-bold mb-3">Application submitted!</h1>
@@ -11,7 +11,7 @@ export default function CarrierPendingPage() {
         start quoting on jobs.
       </p>
 
-      <div className="rounded-xl border border-gray-200 bg-gray-50 px-6 py-4 text-left text-sm space-y-2">
+      <div className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-4 text-left sm:px-6 text-sm space-y-2">
         <p className="font-medium text-gray-700">What happens next:</p>
 
         <p className="text-gray-500">

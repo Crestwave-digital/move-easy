@@ -78,7 +78,7 @@ export default function VerificationTab({ carrierId, documents: initial }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
       <h2 className="text-lg font-bold text-gray-900 mb-6">Verification</h2>
 
       <p className="text-sm text-gray-500 mb-6">
@@ -105,7 +105,7 @@ export default function VerificationTab({ carrierId, documents: initial }) {
               ))}
             </select>
           </div>
-          <label className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 cursor-pointer transition-colors">
+          <label className="inline-flex w-full justify-center items-center gap-2 px-4 py-2.5 sm:w-auto sm:py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 cursor-pointer transition-colors">
             <Upload size={14} />
             {uploading ? 'Uploading…' : 'Upload file'}
             <input
@@ -130,7 +130,7 @@ export default function VerificationTab({ carrierId, documents: initial }) {
           {documents.map((doc) => (
             <div
               key={doc.id}
-              className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg"
+              className="flex items-center justify-between gap-3 py-3 px-3 bg-gray-50 rounded-lg sm:px-4"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <FileText size={18} className="text-gray-400 shrink-0" />
@@ -143,11 +143,11 @@ export default function VerificationTab({ carrierId, documents: initial }) {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex shrink-0 items-center gap-3">
                 {statusBadge(doc.status)}
                 <button
                   onClick={() => handleDelete(doc.id)}
-                  className="text-gray-400 hover:text-red-500 transition-colors"
+                  className="-mr-2 p-2 text-gray-400 hover:text-red-500 transition-colors sm:m-0 sm:p-0"
                 >
                   <Trash2 size={16} />
                 </button>

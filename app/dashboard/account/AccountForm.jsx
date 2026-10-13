@@ -34,12 +34,12 @@ export default function AccountForm({ user, profile, carrierProfile }) {
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
       {/* Profile header */}
-      <div className="flex items-center gap-5 mb-10">
+      <div className="flex items-center gap-4 sm:gap-5 mb-10">
         <div className="flex items-center justify-center w-16 h-16 rounded-full bg-zinc-900 text-white text-2xl font-bold shrink-0">
           {initial}
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-zinc-900">
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold text-zinc-900 break-words">
             {profile?.first_name} {profile?.last_name}
           </h1>
           <span className="inline-block mt-1 px-2.5 py-0.5 text-xs font-semibold rounded-full capitalize bg-zinc-100 text-zinc-700">
@@ -95,19 +95,19 @@ export default function AccountForm({ user, profile, carrierProfile }) {
 
       {/* Carrier profile (read-only) */}
       {carrierProfile && (
-        <div className="mt-10 p-6 rounded-2xl border border-zinc-200 bg-zinc-50">
+        <div className="mt-10 p-4 sm:p-6 rounded-2xl border border-zinc-200 bg-zinc-50">
           <h2 className="text-lg font-bold text-zinc-900 mb-4">
             Carrier Profile
           </h2>
           <div className="space-y-3 text-sm">
-            <div className="flex justify-between">
-              <span className="text-zinc-500">Public name</span>
-              <span className="font-medium text-zinc-800">
+            <div className="flex justify-between gap-4">
+              <span className="text-zinc-500 shrink-0">Public name</span>
+              <span className="font-medium text-zinc-800 text-right min-w-0 break-words">
                 {carrierProfile.public_name || '—'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-zinc-500">Status</span>
+            <div className="flex justify-between gap-4">
+              <span className="text-zinc-500 shrink-0">Status</span>
               <span
                 className={`font-semibold capitalize ${
                   carrierProfile.application_status === 'active'
@@ -120,21 +120,21 @@ export default function AccountForm({ user, profile, carrierProfile }) {
                 {carrierProfile.application_status || 'pending'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-zinc-500">City</span>
-              <span className="font-medium text-zinc-800">
+            <div className="flex justify-between gap-4">
+              <span className="text-zinc-500 shrink-0">City</span>
+              <span className="font-medium text-zinc-800 text-right min-w-0 break-words">
                 {carrierProfile.city || '—'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-zinc-500">Categories</span>
-              <span className="font-medium text-zinc-800 text-right max-w-[60%]">
+            <div className="flex justify-between gap-4">
+              <span className="text-zinc-500 shrink-0">Categories</span>
+              <span className="font-medium text-zinc-800 text-right max-w-[60%] break-words">
                 {carrierProfile.service_categories?.join(', ') || '—'}
               </span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-zinc-500">Payment methods</span>
-              <span className="font-medium text-zinc-800 text-right max-w-[60%]">
+            <div className="flex justify-between gap-4">
+              <span className="text-zinc-500 shrink-0">Payment methods</span>
+              <span className="font-medium text-zinc-800 text-right max-w-[60%] break-words">
                 {carrierProfile.payment_methods?.join(', ') || '—'}
               </span>
             </div>

@@ -38,7 +38,7 @@ export default function SettingsTabs({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="mx-auto flex max-w-5xl gap-6 px-4 py-6">
+      <div className="mx-auto flex max-w-5xl flex-col md:flex-row md:gap-6 md:px-4 md:py-6">
         {/* ── Desktop sidebar ── */}
         <nav className="hidden md:block w-56 shrink-0">
           <div className="sticky top-24 space-y-0.5">

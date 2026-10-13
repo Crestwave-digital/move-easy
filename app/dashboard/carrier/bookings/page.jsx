@@ -63,7 +63,7 @@ export default async function CarrierBookingsPage() {
           { label: 'Completed', count: completed.length, style: 'bg-green-50 text-green-700' },
           { label: 'Cancelled', count: cancelled.length, style: 'bg-gray-50 text-gray-500' },
         ].map((s) => (
-          <div key={s.label} className={`rounded-xl p-4 text-center ${s.style}`}>
+          <div key={s.label} className={`rounded-xl p-3 text-center sm:p-4 ${s.style}`}>
             <p className="text-2xl font-bold">{s.count}</p>
             <p className="text-xs font-medium mt-1">{s.label}</p>
           </div>
@@ -100,12 +100,12 @@ export default async function CarrierBookingsPage() {
             return (
               <div
                 key={booking.id}
-                className={`bg-white rounded-xl border p-5 ${
+                className={`bg-white rounded-xl border p-4 sm:p-5 ${
                   booking.status === 'confirmed' ? 'border-green-400' : 'border-gray-200'
                 }`}
               >
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full capitalize">
                       {jobType}
                     </span>
@@ -125,11 +125,11 @@ export default async function CarrierBookingsPage() {
                   </Link>
                 </div>
 
-                <p className="text-sm font-medium text-gray-800 mb-1">
+                <p className="break-words text-sm font-medium text-gray-800 mb-1">
                   {booking.jobs?.pickup_address?.split(',')[0]} →{' '}
                   {booking.jobs?.delivery_address?.split(',')[0]}
                 </p>
-                <p className="text-xs text-gray-400 mb-4">
+                <p className="break-words text-xs text-gray-400 mb-4">
                   {booking.jobs?.pickup_address} → {booking.jobs?.delivery_address}
                 </p>
 
@@ -141,7 +141,7 @@ export default async function CarrierBookingsPage() {
                 )}
 
                 {/* Earnings breakdown */}
-                <div className="bg-gray-50 rounded-xl p-4 grid grid-cols-3 gap-3 text-center">
+                <div className="bg-gray-50 rounded-xl p-3 grid grid-cols-3 gap-2 text-center sm:p-4 sm:gap-3">
                   <div>
                     <p className="text-xs text-gray-400 mb-1">Quote price</p>
                     <p className="text-sm font-bold text-gray-900">

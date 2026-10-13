@@ -36,7 +36,7 @@ export default function IdentityTab({ profile, carrier, userEmail }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
       <h2 className="text-lg font-bold text-gray-900 mb-6">Identity</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

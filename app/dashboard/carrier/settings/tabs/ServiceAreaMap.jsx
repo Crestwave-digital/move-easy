@@ -114,7 +114,7 @@ export default function ServiceAreaMap({ initialGeoJSON, onChange }) {
   return (
     <div
       ref={containerRef}
-      className="h-80 w-full rounded-xl border border-gray-200 bg-gray-100"
+      className="h-64 w-full rounded-xl sm:h-80 border border-gray-200 bg-gray-100"
     />
   )
 }

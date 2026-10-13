@@ -54,6 +54,17 @@ const SORTERS = {
   created: (r) => new Date(r.job.createdAt ?? 0).getTime(),
 }
 
+const SORT_LABELS = [
+  ['quoted', 'Quoted'],
+  ['price', 'Your price'],
+  ['position', 'Position'],
+  ['bids', 'Bids'],
+  ['messages', 'Messages'],
+  ['route', 'Distance'],
+  ['created', 'Posted'],
+  ['job', 'Job'],
+]
+
 export default function QuoteBoard({ rows }) {
   const [tab, setTab] = useState('active')
   const [query, setQuery] = useState('')
@@ -119,13 +130,13 @@ export default function QuoteBoard({ rows }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Filter by ref, suburb or note"
-            className="w-full rounded-lg border border-gray-200 bg-white py-1.5 pl-8 pr-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+            className="w-full rounded-lg border border-gray-200 bg-white py-2 pl-8 pr-3 text-sm sm:py-1.5 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
           />
         </label>
       </div>
 
       {/* Tabs */}
-      <div className="mb-3 flex gap-1 overflow-x-auto border-b border-gray-200">
+      <div className="mb-3 flex gap-1 overflow-x-auto scrollbar-hide border-b border-gray-200">
         {TABS.map((t) => (
           <button
             key={t.key}
@@ -163,7 +174,41 @@ export default function QuoteBoard({ rows }) {
           )}
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+        <>
+        {/* Mobile: stacked cards */}
+        <div className="md:hidden">
+          <div className="mb-3 flex items-center justify-end gap-2 text-xs text-gray-500">
+            <label htmlFor="quote-sort">Sort by</label>
+            <select
+              id="quote-sort"
+              value={sort.key}
+              onChange={(e) => toggleSort(e.target.value)}
+              className="rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-sm text-gray-700 focus:border-teal-500 focus:outline-none"
+            >
+              {SORT_LABELS.map(([k, label]) => (
+                <option key={k} value={k}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={() => toggleSort(sort.key)}
+              aria-label={sort.dir === 'asc' ? 'Sort descending' : 'Sort ascending'}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600"
+            >
+              {sort.dir === 'asc' ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
+            </button>
+          </div>
+          <div className="space-y-3">
+            {visible.map((r) => (
+              <QuoteCard key={r.id} row={r} />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: table */}
+        <div className="hidden overflow-x-auto rounded-xl border border-gray-200 bg-white md:block">
           <table className="w-full min-w-[960px] text-sm">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50/60 text-left text-xs font-semibold text-gray-500">
@@ -187,6 +232,7 @@ export default function QuoteBoard({ rows }) {
             </tbody>
           </table>
         </div>
+        </>
       )}
 
       {visible.length > 0 && (
@@ -263,22 +309,7 @@ function QuoteRow({ row: r }) {
       </td>
 
       <td className="max-w-[220px] px-3 py-2.5">
-        <p className="truncate text-gray-800" title={r.job.pickup}>
-          {shortAddress(r.job.pickup)}
-        </p>
-        <p className="truncate text-gray-500" title={r.job.delivery}>
-          → {shortAddress(r.job.delivery)}
-        </p>
-        <p className="text-[11px] italic text-gray-400">
-          {r.job.moveFrom
-            ? `${fmtShortDate(r.job.moveFrom)}${
-                r.job.moveTo && r.job.moveTo !== r.job.moveFrom
-                  ? ` – ${fmtShortDate(r.job.moveTo)}`
-                  : ''
-              }`
-            : 'Flexible date'}
-          {r.job.distance != null && ` · ~${r.job.distance} km`}
-        </p>
+        <RouteSummary row={r} />
       </td>
 
       <td className="whitespace-nowrap px-3 py-2.5 bg-gray-50/50">
@@ -302,6 +333,113 @@ function QuoteRow({ row: r }) {
         <NotesCell quoteId={r.id} initial={r.notes} />
       </td>
     </tr>
+  )
+}
+
+function RouteSummary({ row: r }) {
+  return (
+    <>
+      <p className="truncate text-gray-800" title={r.job.pickup}>
+        {shortAddress(r.job.pickup)}
+      </p>
+      <p className="truncate text-gray-500" title={r.job.delivery}>
+        → {shortAddress(r.job.delivery)}
+      </p>
+      <p className="text-[11px] italic text-gray-400">
+        {r.job.moveFrom
+          ? `${fmtShortDate(r.job.moveFrom)}${
+              r.job.moveTo && r.job.moveTo !== r.job.moveFrom
+                ? ` – ${fmtShortDate(r.job.moveTo)}`
+                : ''
+            }`
+          : 'Flexible date'}
+        {r.job.distance != null && ` · ~${r.job.distance} km`}
+      </p>
+    </>
+  )
+}
+
+function QuoteCard({ row: r }) {
+  const href = `/dashboard/carrier/jobs/${r.jobId}`
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white p-4 text-sm">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="font-mono text-[11px] text-gray-400">#{shortJobRef(r.jobId)}</p>
+          <Link
+            href={href}
+            className="font-semibold text-gray-900 hover:text-teal-700 hover:underline"
+          >
+            {jobTitle({ type: r.job.type })}
+          </Link>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="font-semibold text-gray-900">{formatMoney(r.price)}</p>
+          {r.previousPrice != null && r.previousPrice !== r.price && (
+            <p className="text-[11px] text-gray-400 line-through">
+              {formatMoney(r.previousPrice)}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-2 min-w-0">
+        <RouteSummary row={r} />
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-3 border-t border-gray-100 pt-3">
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">Position</p>
+          <PositionCell row={r} />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">Bids</p>
+          <p className="text-gray-900">{r.bidCount}</p>
+          {r.lowest != null && (
+            <p className="text-[11px] italic text-gray-400">Lowest {formatMoney(r.lowest)}</p>
+          )}
+        </div>
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">Messages</p>
+          <Link href={href} className="text-gray-900 hover:text-teal-700">
+            {r.messages.mine}
+          </Link>
+          {r.messages.last && (
+            <p className="text-[11px] italic text-gray-400">
+              Last: {r.messages.last.fromMe ? 'you' : 'customer'},{' '}
+              {relativeTime(r.messages.last.at)}
+            </p>
+          )}
+          <p className="text-[11px] italic text-gray-400">Others: {r.messages.others}</p>
+        </div>
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">Quoted</p>
+          <p className="text-gray-800">{relativeTime(r.quotedAt)}</p>
+          {r.updatedAt && (
+            <p className="text-[11px] italic text-gray-400">edited {relativeTime(r.updatedAt)}</p>
+          )}
+          {r.job.createdAt && (
+            <p className="text-[11px] italic text-gray-400">
+              Posted {relativeTime(r.job.createdAt)}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-3 border-t border-gray-100 pt-3">
+        <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+          Notes <span className="font-normal normal-case text-gray-400">(private)</span>
+        </p>
+        <NotesCell quoteId={r.id} initial={r.notes} />
+      </div>
+
+      <Link
+        href={href}
+        className="mt-3 flex min-h-10 items-center justify-center rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+      >
+        View job →
+      </Link>
+    </div>
   )
 }
 
@@ -360,7 +498,7 @@ function PositionCell({ row }) {
         <button
           onClick={matchLowest}
           disabled={busy}
-          className="inline-flex items-center gap-1 rounded-md bg-teal-600 px-2 py-1 text-[11px] font-semibold text-white hover:bg-teal-700 disabled:opacity-50"
+          className="inline-flex items-center gap-1 rounded-md bg-teal-600 px-3 py-2 text-xs md:px-2 md:py-1 md:text-[11px] font-semibold text-white hover:bg-teal-700 disabled:opacity-50"
         >
           <Zap size={11} />
           {busy ? 'Matching…' : `Match ${formatMoney(status.target)}`}

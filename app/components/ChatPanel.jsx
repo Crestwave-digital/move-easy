@@ -102,7 +102,7 @@ export default function ChatPanel({ conversationId, currentUserId }) {
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 flex flex-col h-[420px]">
+    <div className="bg-white rounded-xl border border-gray-200 flex flex-col h-[65vh] max-h-[420px] sm:h-[420px]">
       {/* Header */}
       <div className="px-4 py-3 border-b border-gray-100">
         <p className="font-semibold text-sm text-gray-800">Messages</p>
@@ -125,13 +125,13 @@ export default function ChatPanel({ conversationId, currentUserId }) {
                 className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[75%] rounded-2xl px-3.5 py-2.5 text-sm ${
+                  className={`max-w-[85%] sm:max-w-[75%] min-w-0 rounded-2xl px-3.5 py-2.5 text-sm ${
                     isMine
                       ? 'bg-teal-600 text-white rounded-br-md'
                       : 'bg-gray-100 text-gray-800 rounded-bl-md'
                   }`}
                 >
-                  <p className="leading-relaxed">{m.content}</p>
+                  <p className="leading-relaxed break-words whitespace-pre-wrap">{m.content}</p>
                   <p
                     className={`text-[10px] mt-1.5 ${
                       isMine ? 'text-teal-100' : 'text-gray-400'
@@ -163,12 +163,12 @@ export default function ChatPanel({ conversationId, currentUserId }) {
           }}
           placeholder="Type a message..."
           disabled={sending}
-          className="flex-1 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
+          className="flex-1 min-w-0 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
         />
         <button
           onClick={send}
           disabled={sending || !text.trim()}
-          className="bg-teal-600 hover:bg-teal-700 disabled:opacity-40 text-white rounded-lg px-3.5 py-2.5 transition-colors"
+          className="shrink-0 bg-teal-600 hover:bg-teal-700 disabled:opacity-40 text-white rounded-lg px-3.5 py-2.5 transition-colors"
         >
           <Send size={16} />
         </button>

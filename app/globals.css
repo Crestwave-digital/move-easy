@@ -17,3 +17,12 @@
     cursor: pointer;
   }
 }
+
+/* iOS Safari zooms into form fields under 16px. Unlayered so it beats text-sm etc. */
+@media (max-width: 639px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}

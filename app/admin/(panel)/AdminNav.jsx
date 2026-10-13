@@ -28,8 +28,8 @@ export default function AdminNav() {
 
   return (
     <nav className="bg-white border-b">
-      <div className="max-w-5xl mx-auto px-4 flex items-center justify-between">
-        <div className="flex gap-1">
+      <div className="max-w-5xl mx-auto px-4 flex items-center justify-between gap-2">
+        <div className="flex gap-1 min-w-0 overflow-x-auto scrollbar-hide whitespace-nowrap">
           {NAV.map((item) => {
             const Icon = item.icon
             const isActive =
@@ -40,7 +40,7 @@ export default function AdminNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-2 px-4 py-4 text-sm font-medium transition-colors ${
+                className={`flex shrink-0 items-center gap-2 px-3 sm:px-4 py-4 text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-blue-600 border-b-2 border-blue-600'
                     : 'text-gray-600 hover:text-blue-600'
@@ -54,10 +54,11 @@ export default function AdminNav() {
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-600 transition-colors px-3 py-2 rounded-lg hover:bg-red-50"
+          aria-label="Logout Admin"
+          className="flex shrink-0 items-center gap-1.5 text-sm text-gray-500 hover:text-red-600 transition-colors px-3 py-2 rounded-lg hover:bg-red-50"
         >
           <LogOut size={16} />
-          Logout Admin
+          <span className="hidden sm:inline">Logout Admin</span>
         </button>
       </div>
     </nav>

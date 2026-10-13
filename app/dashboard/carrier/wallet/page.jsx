@@ -26,11 +26,11 @@ export default async function CarrierWalletPage() {
   const balance = carrier?.wallet_balance ?? 0
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-10">
+    <div className="max-w-2xl mx-auto py-4 sm:px-4 sm:py-10">
       {/* Balance card */}
-      <div className="bg-gray-900 text-white rounded-2xl p-8 mb-6">
+      <div className="bg-gray-900 text-white rounded-2xl p-5 mb-6 sm:p-8">
         <p className="text-sm text-gray-400 mb-1">Available balance</p>
-        <p className="text-4xl font-black">${balance.toFixed(2)}</p>
+        <p className="text-3xl font-black sm:text-4xl">${balance.toFixed(2)}</p>
         <p className="text-xs text-gray-500 mt-2">
           A minimum balance of $1.00 is required to submit quotes. An 18% platform fee is deducted when your quote is accepted.
         </p>
@@ -53,7 +53,7 @@ export default async function CarrierWalletPage() {
       )}
 
       {/* Top up options */}
-      <div className="bg-white rounded-xl border p-6 mb-6">
+      <div className="bg-white rounded-xl border p-4 mb-6 sm:p-6">
         <h2 className="font-bold text-lg mb-4">Add funds</h2>
         <p className="text-sm text-gray-500 mb-4">
           Top up your wallet via Stripe. A minimum balance of $1.00 is needed to submit quotes.
@@ -64,7 +64,7 @@ export default async function CarrierWalletPage() {
       </div>
 
       {/* Transaction history */}
-      <div className="bg-white rounded-xl border p-6">
+      <div className="bg-white rounded-xl border p-4 sm:p-6">
         <h2 className="font-bold text-lg mb-4">Transaction history</h2>
         {!transactions?.length ? (
           <p className="text-sm text-gray-400">No transactions yet.</p>
@@ -73,10 +73,10 @@ export default async function CarrierWalletPage() {
             {transactions.map((tx) => (
               <div
                 key={tx.id}
-                className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0"
+                className="flex justify-between items-center gap-3 py-2 border-b border-gray-50 last:border-0"
               >
-                <div>
-                  <p className="text-sm font-medium text-gray-800">
+                <div className="min-w-0">
+                  <p className="break-words text-sm font-medium text-gray-800">
                     {tx.description}
                   </p>
                   <p className="text-xs text-gray-400">
@@ -84,7 +84,7 @@ export default async function CarrierWalletPage() {
                   </p>
                 </div>
                 <p
-                  className={`font-bold text-sm ${tx.type === 'topup' ? 'text-green-600' : 'text-red-500'}`}
+                  className={`shrink-0 font-bold text-sm ${tx.type === 'topup' ? 'text-green-600' : 'text-red-500'}`}
                 >
                   {tx.type === 'topup' ? '+' : '-'}${tx.amount}
                 </p>
