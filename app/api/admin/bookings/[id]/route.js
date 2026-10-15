@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import { verifyAdminToken, COOKIE_NAME } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import { cancelBooking, completeBooking } from '@/lib/bookings'
 
 // POST /api/admin/bookings/:id { action: 'complete' | 'cancel', reason, reopen }
 export async function POST(req, { params }) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
-  if (!token || !verifyAdminToken(token)) {
+  if (!(await getAdminSession())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

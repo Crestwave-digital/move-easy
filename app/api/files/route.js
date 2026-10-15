@@ -1,20 +1,17 @@
 export const runtime = 'nodejs'
 
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { s3Client, BUCKET_NAME } from '@/lib/s3'
 import { createClient } from '@/lib/supabase/server'
-import { verifyAdminToken, COOKIE_NAME } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 
 // Only verification files are served here; photos stay on public URLs.
 const PRIVATE_PREFIXES = ['private/', 'carrier-documents/']
 
 async function canView(key) {
-  const cookieStore = await cookies()
-  const adminToken = cookieStore.get(COOKIE_NAME)?.value
-  if (adminToken && verifyAdminToken(adminToken)) return true
+  if (await getAdminSession()) return true
 
   const supabase = await createClient()
   const {

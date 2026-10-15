@@ -1,17 +1,13 @@
 import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
-import { verifyAdminToken, COOKIE_NAME } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import AdminNav from './AdminNav'
 
 // Every admin page except /admin/login. Kept in its own route group so the
 // nav + container render on client-side navigation too (a shared layout is
 // not re-rendered when moving between pages, so it must not depend on the path).
 export default async function AdminPanelLayout({ children }) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
-  const payload = token ? verifyAdminToken(token) : null
-
-  if (!payload) {
+  // Valid admin cookie AND still is_admin in the database
+  if (!(await getAdminSession())) {
     redirect('/admin/login')
   }
 

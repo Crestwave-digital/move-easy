@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import { verifyAdminToken, COOKIE_NAME } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import { createServiceClient } from '@/lib/supabase/service-role'
 import { trySendEmail } from '@/lib/email'
 import { carrierApproved, carrierRejected } from '@/lib/email-templates'
@@ -9,9 +8,7 @@ import { loadChecklist } from '@/lib/carrier-profile'
 import { serverError } from '@/lib/api-errors'
 
 export async function POST(req) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
-  if (!token || !verifyAdminToken(token)) {
+  if (!(await getAdminSession())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

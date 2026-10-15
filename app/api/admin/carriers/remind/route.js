@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import { verifyAdminToken, COOKIE_NAME } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import { supabaseAdmin } from '@/lib/supabase/admin'
 import { sendEmail } from '@/lib/email'
 import { profileReminder } from '@/lib/email-templates'
@@ -11,9 +10,7 @@ import { serverError } from '@/lib/api-errors'
 // POST /api/admin/carriers/remind { carrierId } — email the carrier exactly
 // which profile steps they still need before they can quote.
 export async function POST(req) {
-  const cookieStore = await cookies()
-  const token = cookieStore.get(COOKIE_NAME)?.value
-  if (!token || !verifyAdminToken(token)) {
+  if (!(await getAdminSession())) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

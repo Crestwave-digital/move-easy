@@ -16,3 +16,10 @@ export async function getUserContact(userId) {
     return null
   }
 }
+
+// Email addresses of every admin (profiles.is_admin = true).
+export async function getAdminEmails() {
+  const { data: admins } = await supabaseAdmin.from('profiles').select('id').eq('is_admin', true)
+  const contacts = await Promise.all((admins ?? []).map((a) => getUserContact(a.id)))
+  return [...new Set(contacts.filter(Boolean).map((c) => c.email))]
+}

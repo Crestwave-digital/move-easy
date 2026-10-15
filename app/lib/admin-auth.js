@@ -1,4 +1,6 @@
 import { createHmac, timingSafeEqual } from 'crypto'
+import { cookies } from 'next/headers'
+import { supabaseAdmin } from '@/lib/supabase/admin'
 
 const ALGORITHM = 'sha256'
 const SESSION_DURATION = 24 * 60 * 60 * 1000 // 24 hours
@@ -8,8 +10,9 @@ const COOKIE_NAME = 'admin_session'
  * Create a signed session token.
  * Format: base64url(payload).base64url(signature)
  */
-export function createAdminToken(email) {
+export function createAdminToken({ userId, email }) {
   const payload = JSON.stringify({
+    userId,
     email,
     exp: Date.now() + SESSION_DURATION,
   })
@@ -51,6 +54,26 @@ function getSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET
   if (!secret) throw new Error('ADMIN_SESSION_SECRET is not set')
   return secret
+}
+
+/**
+ * The signed-in admin, or null. Checks the cookie AND that the user is still
+ * an admin in the database (profiles.is_admin), so removing the flag revokes
+ * access on the next request.
+ */
+export async function getAdminSession() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get(COOKIE_NAME)?.value
+  const payload = token ? verifyAdminToken(token) : null
+  if (!payload?.userId) return null
+
+  const { data: profile } = await supabaseAdmin
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', payload.userId)
+    .maybeSingle()
+
+  return profile?.is_admin ? { userId: payload.userId, email: payload.email } : null
 }
 
 export { COOKIE_NAME, SESSION_DURATION }

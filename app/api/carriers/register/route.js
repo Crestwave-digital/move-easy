@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 import { carrierApiSchema } from '@/lib/validations/auth'
 import { trySendEmail } from '@/lib/email'
+import { getAdminEmails } from '@/lib/users'
 import {
   carrierApplicationForAdmin,
   carrierApplicationReceived,
@@ -107,16 +108,18 @@ export async function POST(req) {
   }
 
   // Let the applicant know we have it, and tell the admin there's one to review.
+  const adminEmails = await getAdminEmails()
+
   await Promise.all([
     user.email &&
       trySendEmail(
         { to: user.email, ...carrierApplicationReceived({ name: data.displayName }) },
         'carriers/register',
       ),
-    process.env.ADMIN_EMAIL &&
+    adminEmails.length > 0 &&
       trySendEmail(
         {
-          to: process.env.ADMIN_EMAIL,
+          to: adminEmails,
           ...carrierApplicationForAdmin({
             name: data.displayName,
             company: data.companyName,

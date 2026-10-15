@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { trySendEmail } from '@/lib/email'
+import { getAdminEmails } from '@/lib/users'
 import {
   carrierApplicationForAdmin,
   carrierApplicationReceived,
@@ -34,16 +35,18 @@ export async function POST() {
     return NextResponse.json({ sent: false })
   }
 
+  const adminEmails = await getAdminEmails()
+
   await Promise.all([
     user.email &&
       trySendEmail(
         { to: user.email, ...carrierApplicationReceived({ name: carrier.public_name }) },
         'carriers/registered',
       ),
-    process.env.ADMIN_EMAIL &&
+    adminEmails.length > 0 &&
       trySendEmail(
         {
-          to: process.env.ADMIN_EMAIL,
+          to: adminEmails,
           ...carrierApplicationForAdmin({
             name: carrier.public_name,
             company: carrier.legal_company_name,
